@@ -4,13 +4,15 @@
 * [Setup](#setup)
 * [Patterns](#patterns)
 
+
 ## General info
-This project is a technical test for Inditex, it consists of a hexagonal architecture using Spring Boot.
+This project is a technical test for Inditex, it consists of a hexagonal architecture application using Spring Boot.
 
 ## Technologies
 Project is created with:
 * Spring Boot: 3.3.3
 * JDK: 17
+* Swagger OpenAPI 3.0
 
 ## Setup
 To run this project, install it locally using maven commands:
@@ -75,4 +77,6 @@ Once the project is started we can test it by calling the endpoint **GET:/localh
 * Hexagonal Pattern
 * Composite Pattern (Composite Key)
 * Adapter Pattern
+
+
 
