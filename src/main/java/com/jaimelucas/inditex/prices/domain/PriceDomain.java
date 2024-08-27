@@ -18,6 +18,12 @@ public class PriceDomain {
     private static final String INVALID_DATE_FORMAT = "Date format not valid. Must be yyyy-MM-dd HH.mm.ss";
     private static final String DATE_PATTERN = "yyyy-MM-dd HH.mm.ss";
 
+
+    /**
+     * Transform application date string to LocalDateTime
+     * @param applicationDate
+     * @return application date LocalDateTime type
+     */
     public LocalDateTime parseApplicationDate(String applicationDate) {
         try {
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_PATTERN);
@@ -27,12 +33,22 @@ public class PriceDomain {
         }
     }
 
+
+    /**
+     * Find the highest priority price from input list
+     * @param priceDTOList
+     * @return price with the highest priority
+     */
     public PriceDTO findHighestPriorityPrice(List<PriceDTO> priceDTOList) {
         return priceDTOList.stream()
                 .max(Comparator.comparingLong(PriceDTO::getPriority))
                 .orElseThrow(() -> new ResourceNotFoundException(NOT_FOUND_PRICE));
     }
 
+    /**
+     * Check if prices exists
+     * @param priceDTOList
+     */
     public void ensurePricesExist(List<PriceDTO> priceDTOList) {
         if (priceDTOList.isEmpty()) {
             throw new ResourceNotFoundException(NOT_FOUND_PRICE);

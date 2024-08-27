@@ -26,16 +26,16 @@ public class PriceUseCase implements PriceInputPort {
     @Override
     public PriceDTO getByBrandAndProductAndDate(String applicationDate, Long productId, Integer brandId) {
 
-        // Convertir la fecha usando el servicio de dominio
+        // Convert date using domain service
         LocalDateTime dateTime = priceDomain.parseApplicationDate(applicationDate);
 
-        // Obtener precios del repositorio
+        // Retrieves prices from repository
         List<PriceDTO> priceDTOList = priceRepository.getByBrandAndProductAndDate(brandId, productId, dateTime);
 
-        // Asegurar que existan precios
+        // Ensure prices exists
         priceDomain.ensurePricesExist(priceDTOList);
 
-        // Seleccionar el precio de mayor prioridad
+        // Select the highest priority price
         return priceDomain.findHighestPriorityPrice(priceDTOList);
     }
 }
