@@ -19,7 +19,9 @@ Project is created with:
 * Swagger OpenAPI 3.0
 
 ## Setup
-To run this project, install it locally using maven commands:
+To run this project, there are two methods:
+
+### a. Using maven commands:
 
 1. Navigate to the project directory:
 
@@ -72,6 +74,28 @@ $ mvn clean package
 3. Run the Spring Boot application:
 ```
 $ mvn spring-boot:run
+```
+
+### b. Using Docker
+
+1. Navigate to the project directory:
+```
+cd path/to/project/directory
+```
+
+2. Generate JAR artifact: 
+```
+mvn clean package
+```
+
+3. Build Docker image: 
+```
+docker build -t application-name .
+```
+
+4. Execute Docker container: 
+```
+docker run -p 8080:8080 application-name
 ```
 
 ## Execution
