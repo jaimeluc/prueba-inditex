@@ -73,7 +73,8 @@ $ mvn clean package
 $ mvn spring-boot:run
 ```
 
-Once the project is started we can test it by calling the endpoint, p.e, **GET:/localhost:8080/price?brandId=1&applicationDate=2020-06-15 21.00.00&productId=35455** using an API platform such as Postman.
+Once the project is started we can test it by calling the endpoint, p.e, **GET:/localhost:8080/price?brandId=1&applicationDate=2020-06-15 21.00.00&productId=35455** using an API platform such as Postman.  
+
 You can also try the application by entering SwaggerUI: http://localhost:8080/swagger-ui/index.html
 
 ## Design Patterns 
