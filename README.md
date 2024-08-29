@@ -30,7 +30,7 @@ Project is created with:
 
 ## Prerequisites
 You must have installed: 
-* Java Development Kit 17
+* OpenJDK 17
 * Apache Maven 3.x.x or Maven Bundled in your IDE
 * Docker Engine or Docker Desktop (optional)
 
