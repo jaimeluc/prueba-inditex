@@ -194,3 +194,7 @@ for this I have used JUnit and MockMvc.
 
 I have also included **unit tests**, they are included in the class [PriceDoamainTest.java](./src/test/java/com/jaimelucas/inditex/prices/domain/PriceDomainTest.java)
 
+To run the tests we can use the following command: 
+```
+mvn test
+```

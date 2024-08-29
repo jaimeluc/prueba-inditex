@@ -20,10 +20,10 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copy the built JAR from the build stage
-COPY --from=build /app/target/*.jar inditex-0.0.1-SNAPSHOT.jar
+COPY --from=build /app/target/*.jar inditex-1.0.0-SNAPSHOT.jar
 
 # Expose the port where the Spring Boot application will run
 EXPOSE 8080
 
 # Command to run the application
-ENTRYPOINT ["java", "-jar", "/app/inditex-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "/app/inditex-1.0.0-SNAPSHOT.jar"]
