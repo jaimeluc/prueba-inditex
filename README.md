@@ -213,12 +213,14 @@ Below I briefly present and explain the patterns that I have used and the advant
 I have developed **integration tests**, they are in the class [PriceAPITests.java](./src/test/java/com/jaimelucas/inditex/prices/infrastructure/inputadapter/http/PriceAPITests.java),
 for this I have used JUnit and MockMvc.
 
-I have also included **unit tests**, they are included in the class [PriceDoamainTest.java](./src/test/java/com/jaimelucas/inditex/prices/domain/PriceDomainTest.java)
+I have also included **unit tests**, they are included in the class [PriceDomainTest.java](./src/test/java/com/jaimelucas/inditex/prices/domain/PriceDomainTest.java)
 
 To run the tests we can use the following command: 
 ```
 mvn test
 ```
+
+**Coverage** reached 85% of the lines of code.
 
 ## Releases
 * Version 1.0.0 - Initial Release. Released August 28, 2024
