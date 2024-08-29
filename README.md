@@ -1,22 +1,37 @@
 ## Table of contents
-* [General info](#general-info)
+* [General Info](#general-info)
 * [Technologies](#technologies)
+* [Libraries](#libraries)
+* [Prerequisites](#prerequisites)
 * [Setup](#setup)
+* [High-Concurrency Management](#high-concurrency-management)
 * [Execution](#execution)
 * [Design Patterns](#design-patterns)
+* [Testing](#testing)
 
 
-## General info
+## General Info
 This project is a technical test for Inditex, it consists of a hexagonal architecture application using Spring Boot.
 The application retrieves the final price of a given product filtered by application date, brand identifier and product
 identifier.
 
 ## Technologies
 Project is created with:
-* Spring Boot: 3.3.3
-* JDK: 17
+* Spring Boot 3.3.3
+* JUnit 4.13.2
+* Swagger 
+* Java 17
 * Maven 3.8.1
-* Swagger OpenAPI 3.0
+
+## Libraries
+* Lombok 1.18.20
+* Mapstruct 1.5.3.Final
+
+## Prerequisites
+You must have installed: 
+* Java Development Kit 17
+* Apache Maven 3.x.x or Maven Bundled in your IDE
+* Docker Engine or Docker Desktop (optional)
 
 ## Setup
 To run this project, there are two methods:
@@ -26,77 +41,106 @@ To run this project, there are two methods:
 1. Navigate to the project directory:
 
 ```
-$ cd path/to/project/directory
+cd path/to/project/directory
 ```
 
 2. Clean the project: 
 
 ```
-$ mvn clean 
+mvn clean 
 ```
 
 3. Compile the project: 
 
 ```
-$ mvn compile
+mvn compile
 ```
 
 4. Run the tests: 
 
 ```
-$ mvn test
+mvn test
 ```
 5. Build the project:
 
 ```
-$ mvn package
+mvn package
 ```
 
 6. Run the Spring Boot application:
 
 ```
-$ mvn spring-boot:run
+mvn spring-boot:run
 ```
 
 #### Here's a shorter version with fewer commands:
 1. Navigate to the project directory:
 
 ```
-$ cd path/to/project/directory
+cd path/to/project/directory
 ```
 
 2. Clean, compile, and package the project:
 
 ```
-$ mvn clean package
+mvn clean package
 ```
 
 3. Run the Spring Boot application:
 ```
-$ mvn spring-boot:run
+mvn spring-boot:run
 ```
 
 ### b. Using Docker
 
-1. Navigate to the project directory:
-```
-cd path/to/project/directory
-```
+In this case, you must have installed Docker Engine or Docker Desktop in your machine.
 
-2. Generate JAR artifact: 
+1. Generate JAR artifact: 
 ```
 mvn clean package
 ```
 
-3. Build Docker image: 
+2. Build Docker image: 
 ```
-docker build -t application-name .
+docker build -t <application-name> .
 ```
 
-4. Execute Docker container: 
+3. Execute Docker container: 
 ```
-docker run -p 8080:8080 application-name
+docker run -p 8080:8080 <application-name>
 ```
+
+## High-Concurrency Management 
+To prepare this application for high-concurrency management I have used Kubernetes (with the creation of two manifest files in the root 
+of the project; [deployment.yml](./deployment.yml) and [service.yml](./service.yml)), this allows us to do a horizontal scaling of applications in an efficient and automated way. Horizontal scaling consists of increasing the number of instances (replicas) of an application to handle larger workloads, instead of increasing the resources (CPU, memory) of a single instance, which would be vertical scaling.
+
+You can **manually scale the application** by changing the number of replicas in [deployment.yml](./deployment.yml) or by using the following
+command:
+```
+kubectl scale deployment inditex-app --replicas=<number_of_replicas>
+```
+### Automatic Scaling
+
+Kubernetes supports automatic scaling of pods based on metrics such as CPU or memory usage using the Horizontal Pod Autoscaler (HPA).
+HPA monitors pod metrics and automatically adjusts the number of replicas to maintain application performance.
+
+To implement this easily we can create a hpa.yml file in the root of our project that would have the following content:
+
+```yaml
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: inditex-app-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: inditex-app
+minReplicas: 2
+maxReplicas: 10
+targetCPUUtilizationPercentage: 80
+```
+This HPA will adjust the number of replicas between 2 and 10, trying to keep the CPU utilization around 80%.
 
 ## Execution
 
@@ -108,6 +152,9 @@ curl --location --request GET 'localhost:8080/price?brandId=1&applicationDate=20
 You can also try the application by entering SwaggerUI: http://localhost:8080/swagger-ui/index.html
 
 ## Design Patterns 
+
+Below I briefly present and explain the patterns that I have used and the advantages that have led me to choose them:
+
 * **Hexagonal Pattern**: The hexagonal pattern helps us to have maintainable, scalable and testable code. It is included in
   clean architectures, which separate business logic from infrastructure.
 
@@ -139,5 +186,11 @@ You can also try the application by entering SwaggerUI: http://localhost:8080/sw
 * **Dependency Injection**: In order to ensure the Dependency Inversion Principle, we apply Constructor-based Dependency Injection. 
  It improves modularity, testability, and maintainability of the code by allowing dependencies to be injected from outside rather than being created internally.
 
+  
+## Testing
 
+I have developed **integration tests**, they are in the class [PriceAPITests.java](./src/test/java/com/jaimelucas/inditex/prices/infrastructure/inputadapter/http/PriceAPITests.java),
+for this I have used JUnit and MockMvc.
+
+I have also included **unit tests**, they are included in the class [PriceDoamainTest.java](./src/test/java/com/jaimelucas/inditex/prices/domain/PriceDomainTest.java)
 
