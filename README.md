@@ -95,17 +95,12 @@ mvn spring-boot:run
 
 In this case, you must have installed Docker Engine or Docker Desktop in your machine.
 
-1. Generate JAR artifact: 
-```
-mvn clean package
-```
-
-2. Build Docker image: 
+1. Build Docker image: 
 ```
 docker build -t <application-name> .
 ```
 
-3. Execute Docker container: 
+2. Execute Docker container: 
 ```
 docker run -p 8080:8080 <application-name>
 ```
