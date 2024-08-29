@@ -222,3 +222,4 @@ mvn test
 
 ## Releases
 * Version 1.0.0 - Initial Release. Released August 28, 2024
+* Version 1.0.1 - Minor changes in API documentation and README. Released August 29, 2024
