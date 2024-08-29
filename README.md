@@ -8,6 +8,7 @@
 * [Execution](#execution)
 * [Design Patterns](#design-patterns)
 * [Testing](#testing)
+* [Releases](#releases)
 
 
 ## General Info
@@ -95,12 +96,18 @@ mvn spring-boot:run
 
 In this case, you must have installed Docker Engine or Docker Desktop in your machine.
 
-1. Build Docker image: 
+1. Navigate to the project directory:
+
+```
+cd path/to/project/directory
+```
+
+2. Build Docker image: 
 ```
 docker build -t <application-name> .
 ```
 
-2. Execute Docker container: 
+3. Execute Docker container: 
 ```
 docker run -p 8080:8080 <application-name>
 ```
@@ -139,10 +146,29 @@ This HPA will adjust the number of replicas between 2 and 10, trying to keep the
 
 ## Execution
 
-Once the project is started we can test it by calling the endpoint, p.e, **GET:/localhost:8080/price?brandId=1&applicationDate=2020-06-15 21.00.00&productId=35455** using an API platform such as Postman.  
+Once the project is started we can test it by calling the endpoint. You can try it with an API platform like Postman.
+
+Here’s a brief documentation for that endpoint:
+
+**URI**: /price
+
+**Method**: GET
+
+**Description**: Retrieves the applicable price for a specific product at a given date and time.
+
+**Query Parameters**:
+
+   * brandId (int, required): The ID of the brand making the request.
+   * applicationDate (string, required): The date and time for which the price is requested, in yyyy-MM-dd HH:mm:ss format.
+   * productId (int, required): The ID of the product for which the price is requested.
+
+**Request Example**:
 ```
-curl --location --request GET 'localhost:8080/price?brandId=<brand_identifier>&applicationDate=<application_date>&productId=<product_identifier>'
+GET /price?brandId=1&applicationDate=2020-06-15 21:00:00&productId=35455
 ```
+
+**Response**: Returns the applicable price of the product for the specified date and time.
+
 
 You can also try the application by entering SwaggerUI: http://localhost:8080/swagger-ui/index.html
 
@@ -193,3 +219,6 @@ To run the tests we can use the following command:
 ```
 mvn test
 ```
+
+## Releases
+* Version 1.0.0 - Initial Release. Released August 28, 2024
