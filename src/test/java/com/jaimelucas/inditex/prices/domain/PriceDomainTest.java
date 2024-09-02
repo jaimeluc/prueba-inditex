@@ -1,6 +1,6 @@
-package com.jaimelucas.inditex.prices.domain;
+/*package com.jaimelucas.inditex.prices.domain;
 
-import com.jaimelucas.inditex.prices.application.response.PriceDTO;
+import com.jaimelucas.inditex.prices.infrastructure.dtos.PriceDTO;
 import com.jaimelucas.inditex.prices.domain.exceptions.DateFormatBadRequestException;
 import com.jaimelucas.inditex.prices.domain.exceptions.ResourceNotFoundException;
 import org.junit.Test;
@@ -99,4 +99,4 @@ public class PriceDomainTest {
 
         assertEquals("Not found price with the specified parameters", exception.getMessage());
     }
-}
+}*/

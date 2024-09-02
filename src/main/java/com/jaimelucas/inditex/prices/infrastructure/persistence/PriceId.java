@@ -1,4 +1,4 @@
-package com.jaimelucas.inditex.prices.infrastructure.outputport;
+package com.jaimelucas.inditex.prices.infrastructure.persistence;
 
 
 import jakarta.persistence.Column;

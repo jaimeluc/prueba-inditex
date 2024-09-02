@@ -1,7 +1,7 @@
-package com.jaimelucas.inditex.prices.infrastructure.inputadapter.http;
+package com.jaimelucas.inditex.prices.infrastructure.web;
 
-import com.jaimelucas.inditex.prices.application.response.PriceDTO;
-import com.jaimelucas.inditex.prices.infrastructure.inputport.PriceInputPort;
+import com.jaimelucas.inditex.prices.application.GetPriceUseCase;
+import com.jaimelucas.inditex.prices.domain.model.Price;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Tag(name = "Price", description = "Price-related operations")
-public class PriceAPI {
+public class PriceController {
 
-    private final PriceInputPort priceInputPort;
+    private final GetPriceUseCase getPriceUseCase;
 
     @Autowired
-    public PriceAPI(PriceInputPort priceInputPort) {
-        this.priceInputPort = priceInputPort;
+    public PriceController(GetPriceUseCase getPriceUseCase) {
+        this.getPriceUseCase = getPriceUseCase;
     }
 
     @Operation(summary = "Retrieves price by application date, product Id and brand Id", description = "Retrieves the highest priority price within the date range")
@@ -33,14 +33,14 @@ public class PriceAPI {
 
     })
     @GetMapping("price")
-    public ResponseEntity<PriceDTO> getPrice(
+    public ResponseEntity<Price> getPrice(
             @Parameter(description = "Application date", example = "2020-06-15 21.00.00", required = true) @RequestParam("applicationDate") String applicationDate,
             @Parameter(description = "Product Id", example = "35455", required = true) @RequestParam("productId") Long productId,
             @Parameter(description = "Brand Id", example = "1", required = true) @RequestParam("brandId") Integer brandId){
 
-        PriceDTO priceDTO = priceInputPort.getByBrandAndProductAndDate(applicationDate, productId, brandId);
+        Price price = getPriceUseCase.getPriceById(applicationDate, productId, brandId);
 
-        return new ResponseEntity<>(priceDTO, HttpStatus.OK);
+        return new ResponseEntity<>(price, HttpStatus.OK);
 
     }
 }

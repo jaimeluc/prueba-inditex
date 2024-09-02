@@ -1,7 +1,5 @@
-package com.jaimelucas.inditex.prices.infrastructure.outputadapter;
+package com.jaimelucas.inditex.prices.infrastructure.persistence;
 
-import com.jaimelucas.inditex.prices.infrastructure.outputport.PriceEntity;
-import com.jaimelucas.inditex.prices.infrastructure.outputport.PriceId;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

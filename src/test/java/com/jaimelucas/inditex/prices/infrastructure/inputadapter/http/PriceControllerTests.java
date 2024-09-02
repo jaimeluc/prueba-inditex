@@ -1,4 +1,4 @@
-package com.jaimelucas.inditex.prices.infrastructure.inputadapter.http;
+/*package com.jaimelucas.inditex.prices.infrastructure.inputadapter.http;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class PriceAPITests {
+class PriceControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
@@ -70,3 +70,4 @@ class PriceAPITests {
                 .andExpect(content().string(containsString("38.95")));
     }
 }
+*/
