@@ -8,6 +8,7 @@
 * [Execution](#execution)
 * [Design Patterns](#design-patterns)
 * [Testing](#testing)
+* [QA](#qa)
 * [Releases](#releases)
 
 
@@ -88,6 +89,7 @@ mvn clean package
 ```
 
 3. Run the Spring Boot application:
+
 ```
 mvn spring-boot:run
 ```
@@ -103,23 +105,27 @@ cd path/to/project/directory
 ```
 
 2. Build Docker image: 
+
 ```
 docker build -t <application-name> .
 ```
 
 3. Execute Docker container: 
+
 ```
 docker run -p 8080:8080 <application-name>
 ```
 
 ## High-Concurrency Management 
 To prepare this application for high-concurrency management I have used Kubernetes (with the creation of two manifest files in the root 
-of the project; [deployment.yml](./deployment.yml) and [service.yml](./service.yml)), this allows us to do a horizontal scaling of applications in an efficient and automated way. Horizontal scaling consists of increasing the number of instances (replicas) of an application to handle larger workloads, instead of increasing the resources (CPU, memory) of a single instance, which would be vertical scaling.
+of the project; [deployment.yml](./deployment.yml) and [service.yml](./service.yml)), this allows us to do a horizontal scaling of applications in an 
+efficient and automated way. Horizontal scaling consists of increasing the number of instances (replicas) of an application to handle larger workloads,
+instead of increasing the resources (CPU, memory) of a single instance, which would be vertical scaling.
 
 You can **manually scale the application** by changing the number of replicas in [deployment.yml](./deployment.yml) or by using the following
 command:
 ```
-kubectl scale deployment inditex-app --replicas=<number_of_replicas>
+kubectl scale deployment <deployment_name> --replicas=<number_of_replicas>
 ```
 ### Automatic Scaling
 
@@ -210,18 +216,33 @@ Below I briefly present and explain the patterns that I have used and the advant
   
 ## Testing
 
-I have developed **integration tests**, they are in the class [PriceAPITests.java](./src/test/java/com/jaimelucas/inditex/prices/infrastructure/inputadapter/http/PriceAPITests.java),
+I have developed **integration tests**, they are in the class [PriceControllerTests.java](./src/test/java/com/jaimelucas/inditex/prices/infrastructure/web/PriceControllerTests.java),
 for this I have used JUnit and MockMvc.
 
-I have also included **unit tests**, they are included in the class [PriceDomainTest.java](./src/test/java/com/jaimelucas/inditex/prices/domain/PriceDomainTest.java)
+I have also included **unit tests**, they are included in the class [GetPriceUseCaseTest.java](./src/test/java/com/jaimelucas/inditex/prices/application/GetPriceUseCaseTest.java)
 
 To run the tests we can use the following command: 
 ```
 mvn test
 ```
 
-**Coverage** reached 85% of the lines of code.
+With the above command you can generate reports on code coverage thanks to the **JaCoCo** tool.
+The report will be generated when you launch the mvn test command, it will appear in [target/site/jacoco/index.html](./target/site/jacoco/index.html)
+
+## QA
+
+I have also configured the project to connect to **Sonar**, in order to perform an analysis with it, it is necessary to have
+a **SonarQube** server installed. Once installed, we would proceed to use the command:
+
+```
+mvn clean verify sonar:sonar -Dsonar.token=<token>
+```
+
+The rest of the parameters are arranged in the [pom.xml](pom.xml)
+
+
 
 ## Releases
 * Version 1.0.0 - Initial Release. Released August 28, 2024
 * Version 1.0.1 - Minor changes in API documentation and README. Released August 29, 2024
+* Version 1.0.2 - Changes in architecture. Addded JaCoCo and Sonar configuration

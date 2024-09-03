@@ -1,4 +1,4 @@
-/*package com.jaimelucas.inditex.prices.infrastructure.inputadapter.http;
+package com.jaimelucas.inditex.prices.infrastructure.web;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ class PriceControllerTests {
         mockMvc.perform(get("/price")
                 .param("brandId", "1")
                 .param("productId", "35455")
-                .param("applicationDate", "2020-06-14 10.00.00"))
+                .param("applicationDate", "2020-06-14 10:00:00"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("35.5")));
     }
@@ -35,7 +35,7 @@ class PriceControllerTests {
         mockMvc.perform(get("/price")
                         .param("brandId", "1")
                         .param("productId", "35455")
-                        .param("applicationDate", "2020-06-14 16.00.00"))
+                        .param("applicationDate", "2020-06-14 16:00:00"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("25.45")));
     }
@@ -45,7 +45,7 @@ class PriceControllerTests {
         mockMvc.perform(get("/price")
                         .param("brandId", "1")
                         .param("productId", "35455")
-                        .param("applicationDate", "2020-06-14 21.00.00"))
+                        .param("applicationDate", "2020-06-14 21:00:00"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("35.5")));
     }
@@ -55,7 +55,7 @@ class PriceControllerTests {
         mockMvc.perform(get("/price")
                         .param("brandId", "1")
                         .param("productId", "35455")
-                        .param("applicationDate", "2020-06-15 10.00.00"))
+                        .param("applicationDate", "2020-06-15 10:00:00"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("30.5")));
     }
@@ -65,9 +65,8 @@ class PriceControllerTests {
         mockMvc.perform(get("/price")
                         .param("brandId", "1")
                         .param("productId", "35455")
-                        .param("applicationDate", "2020-06-16 21.00.00"))
+                        .param("applicationDate", "2020-06-16 21:00:00"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("38.95")));
     }
 }
-*/

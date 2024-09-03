@@ -26,5 +26,8 @@ public class PriceId implements Serializable {
 
     @Column(name = "BRAND_ID")
     private Integer brandId;
+
+    @Column(name = "PRIORITY")
+    private Long priority;
 }
 

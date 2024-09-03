@@ -27,9 +27,6 @@ public class PriceEntity {
     @Column(name = "PRICE_LIST")
     private Long priceList;
 
-    @Column(name = "PRIORITY")
-    private Long priority;
-
     @Column(name = "CURR")
     private String currency;
 

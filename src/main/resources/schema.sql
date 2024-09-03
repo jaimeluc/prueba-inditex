@@ -7,5 +7,5 @@ CREATE TABLE PRICES (
   PRIORITY INT,
   PRICE DECIMAL(10,2),
   CURR CHAR(3),
-   PRIMARY KEY (brand_id, start_date, product_id)
+   PRIMARY KEY (brand_id, start_date, product_id, priority)
 );

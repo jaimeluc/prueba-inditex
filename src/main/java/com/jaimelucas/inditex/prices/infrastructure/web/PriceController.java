@@ -25,6 +25,7 @@ public class PriceController {
         this.getPriceUseCase = getPriceUseCase;
     }
 
+
     @Operation(summary = "Retrieves price by application date, product Id and brand Id", description = "Retrieves the highest priority price within the date range")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successful operation, price found"),

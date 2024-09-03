@@ -22,6 +22,14 @@ public class JpaPriceRepository implements PriceRepository {
         this.mapper = mapper;
     }
 
+    /**
+     * A method to find prices by date, product, and brand.
+     *
+     * @param  date       the date to search for prices
+     * @param  productId  the id of the product
+     * @param  brandId    the id of the brand
+     * @return            a list of prices matching the criteria
+     */
     @Override
     public List<Price> findByDateAndProductAndBrand(LocalDateTime date, Long productId, Integer brandId) {
 
